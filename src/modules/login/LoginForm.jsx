@@ -5,7 +5,9 @@ class LoginForm extends React.Component {
     super(props)
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      country: "",
+      active: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -21,11 +23,10 @@ class LoginForm extends React.Component {
   // }
 
   handleChange(event) {
-    console.log(event)
-    const { name, value } = event.target
+    const { checked, name, value, type } = event.target
 
     this.setState({
-      [name]: value
+      [name]: type === "checkbox" ? checked : value
     })
   }
 
@@ -33,6 +34,9 @@ class LoginForm extends React.Component {
     event.preventDefault()
     console.log(this.state.username)
     console.log(this.state.password)
+    console.log(this.state.country)
+    console.log(this.state.active)
+
     if (!this.state.username) {
       alert('El nombre de usuario es requerido')
     } else {
@@ -41,10 +45,22 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    let options = ["Argentina", "Uruguay", "Chile", "Paraguay"];
+
     return (
       <form onSubmit={this.handleSubmit} className="form">
         <input name="username" value={this.state.username} onChange={this.handleChange} placeholder="usuario" />
         <input name="password" value={this.state.password} onChange={this.handleChange} type="password" placeholder="contraseña" />
+        <select name="country" value={this.state.country} onChange={this.handleChange}>
+          <option value={""}>Seleccionar</option>
+          {
+            options.map(country => <option key={country} value={country}>{country}</option>)
+          }
+        </select>
+        <div>
+          <input type="checkbox" name="active" value={this.state.active} onChange={this.handleChange} />
+          <label>activo</label>
+        </div>
         <input type="submit" value="Iniciar sesión" />
       </form>
     )
