@@ -31,24 +31,3 @@
   justify-content: center;
   align-items: center;
 }
-
-.container {
-  border: 1px solid;
-  display: flex;
-}
-
-.image {
-  width: 300px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  justify-content: center;
-}
-
-input {
-  margin-bottom: 10px;
-}
-
